@@ -59,47 +59,65 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 	}
 
-
+	ArrayList<Account> accounts = new ArrayList<>();
 
 	
 	@Override
 	public int createAccount(String handle) throws IllegalHandleException, InvalidHandleException {
-		// TODO Auto-generated method stub
-		Account firstAccount = new Account(handle);
-		int id = firstAccount.getID();
+		accounts.add(new Account(handle));
+		int i = accounts.size() - 1;
+		int id = accounts.get(i).getID();
 		return id;
 	}
 
 	@Override
 	public int createAccount(String handle, String description) throws IllegalHandleException, InvalidHandleException {
-		// TODO Auto-generated method stub
-		Account firstAccount = new Account(handle, description);
-		int id = firstAccount.getID();
+		accounts.add(new Account(handle, description));
+		int i = accounts.size() - 1;
+		int id = accounts.get(i).getID();
 		return id;
 	}
 
 	@Override
-	public void removeAccount(int id) throws AccountIDNotRecognisedException {
-		// TODO Auto-generated method stub
+	public void removeAccount(int id) throws AccountIDNotRecognisedException {;
+	for (int i = 0; i<accounts.size(); i++){
+		if (accounts.get(i).getID() == id){
+			accounts.remove(i);
+			break;
+		}
+	}
 
 	}
 
 	@Override
 	public void removeAccount(String handle) throws HandleNotRecognisedException {
-		// TODO Auto-generated method stub
+		for (int i = 0; i<accounts.size(); i++){
+			if (accounts.get(i).getHandle() == handle){
+				accounts.remove(i);
+				break;
+			}
+		}
 
 	}
 
 	@Override
 	public void changeAccountHandle(String oldHandle, String newHandle)
 			throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
-		// TODO Auto-generated method stub
+		for (int i = 0; i<accounts.size(); i++){
+			if (accounts.get(i).getHandle() == oldHandle){
+				accounts.get(i).handle = newHandle;
+			}
+		}
 
 	}
 
 	@Override
 	public void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
-		// TODO Auto-generated method stub
+		for (int i = 0; i<accounts.size(); i++){
+			if (accounts.get(i).getHandle() == handle){
+				accounts.get(i).description = description;
+			}
+		}
 
 	}
 
@@ -150,8 +168,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 	@Override
 	public int getNumberOfAccounts() {
-		// TODO Auto-generated method stub
-		return 0;
+		return accounts.size();
 	}
 
 	@Override
