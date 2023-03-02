@@ -12,54 +12,9 @@ import java.util.ArrayList;
  */
 public class SocialMedia implements SocialMediaPlatform {
 
-	ArrayList<Integer> accountIDs = new ArrayList<Integer>();
-	ArrayList<String> handles = new ArrayList<String>();
-
-	public class Account{
-		//attributes
-		public int ID;
-		public String handle;
-		public String description;
-
-		//constructors
-		public Account(String handle){
-			this.ID = createAccountID();
-			this.handle = handle;
-		}
-
-		public Account(String handle, String description){
-			this.ID = createAccountID();
-			this.handle = handle;
-			this.description = description;
-		}
-
-		//methods
-		public int createAccountID(){
-			double accountID = (Math.floor(Math.random() * 90000) + 10000);
-			int intAccountID = (int) accountID;
-			for (int id : accountIDs) {
-				if (intAccountID == id){
-					intAccountID = createAccountID();
-				}
-			}
-			accountIDs.add(intAccountID);
-			return intAccountID;
-		}
-
-		public int getID(){
-			return (this.ID);
-		}
-
-		public String getHandle(){
-			return (this.handle);
-		}
-
-		public String getDescription(){
-			return (this.description);
-		}
-	}
 
 	ArrayList<Account> accounts = new ArrayList<>();
+	ArrayList<Post> posts = new ArrayList<>();
 
 	
 	@Override
@@ -105,7 +60,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
 		for (int i = 0; i<accounts.size(); i++){
 			if (accounts.get(i).getHandle() == oldHandle){
-				accounts.get(i).handle = newHandle;
+				accounts.get(i).setHandle(newHandle);
 			}
 		}
 
@@ -115,7 +70,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
 		for (int i = 0; i<accounts.size(); i++){
 			if (accounts.get(i).getHandle() == handle){
-				accounts.get(i).description = description;
+				accounts.get(i).setDescription(description);
 			}
 		}
 
@@ -129,8 +84,17 @@ public class SocialMedia implements SocialMediaPlatform {
 
 	@Override
 	public int createPost(String handle, String message) throws HandleNotRecognisedException, InvalidPostException {
-		// TODO Auto-generated method stub
-		return 0;
+		for (int i = 0; i<accounts.size(); i++){
+			if (accounts.get(i).getHandle() == handle){
+				int accountID = accounts.get(i).getID();
+				posts.add(new Post(accountID, handle, message));
+				break;
+			}
+		}
+				
+		int j = posts.size() - 1;
+		int postID = posts.get(j).getID();
+		return postID;
 	}
 
 	@Override
