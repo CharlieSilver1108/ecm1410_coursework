@@ -1,5 +1,8 @@
 package socialmedia;
 
+import java.util.ArrayList;
+
+
 public class Post{
 
     //attributes
@@ -8,6 +11,10 @@ public class Post{
     private String accountHandle;
     private String contents;
     private static int numberOfPosts = 0;
+
+    private ArrayList<CommentPost> comments = new ArrayList<>();
+    private ArrayList<EndorsePost> endorsements = new ArrayList<>();
+
     //constructors
     public Post(int accountID, String accountHandle, String contents){
         this.ID = ++numberOfPosts;
@@ -37,4 +44,11 @@ public class Post{
         this.contents = contents;
     }
 
+    public void addComment(CommentPost Post){
+        comments.add(Post);
+    }
+
+    public void addEndorsement(EndorsePost Post){
+        endorsements.add(Post);
+    }
 }
