@@ -39,6 +39,10 @@ public class Account {
 		public int getID(){
 			return (this.ID);
 		}
+	
+		public arrayList getAccountIDs(){
+			return (accountIDs);
+		}
 
 		public String getHandle(){
 			return (this.handle);
