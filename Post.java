@@ -20,7 +20,12 @@ public class Post{
         this.ID = ++numberOfPosts;
         this.accountID = accountID;
         this.accountHandle = accountHandle;
-        this.contents = contents;
+        if(contents.length() <= 100){
+            this.contents = contents;
+        }else{
+            throw new InvalidPostException("Post contains too many characters")
+        }
+            
     }
 
     //methods
