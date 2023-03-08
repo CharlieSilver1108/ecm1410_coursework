@@ -18,7 +18,11 @@ public class Post{
     //constructors
     public Post(int accountID, String accountHandle, String contents){
         this.ID = ++numberOfPosts;
-        this.accountID = accountID;
+        if(validateAccountID(accountID)){
+            this.accountID = accountID;
+        }else{
+            throw new AccountIDNotRecognisedException("AccountID is invalid")
+        }
         this.accountHandle = accountHandle;
         if(contents.length() <= 100){
             this.contents = contents;
@@ -47,6 +51,16 @@ public class Post{
 
     public void setContents(String contents){
         this.contents = contents;
+    }
+    
+    public boolean validateAccountID(int accountID){
+        //check if accountID exists in accounts id arraylist
+        arrayList<Integer> accountIDs = account.getAccountIDs;
+        for (int id : accountIDs) {
+            if (intAccountID == id){
+                intAccountID = createAccountID();
+            }
+        }
     }
 
     public void addComment(CommentPost Post){
